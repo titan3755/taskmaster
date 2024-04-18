@@ -1,4 +1,5 @@
 import FormComp from "./main_comps/Form"
+import FunctionBarComp from "./main_comps/FunctionBar"
 import ItemListComp from "./main_comps/ItemList"
 import TitleComp from "./main_comps/Title"
 
@@ -21,6 +22,7 @@ function MainBox() {
                 <TitleComp />
                 <FormComp />
                 <ItemListComp />
+                <FunctionBarComp />
             </div>
         </>
     )
