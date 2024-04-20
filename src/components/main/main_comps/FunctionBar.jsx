@@ -1,7 +1,7 @@
 export default function FunctionBarComp() {
     return (
         <>
-            <div className="flex flex-row justify-start align-middle gap-10 w-full -mt-[68px]">
+            <div className="flex flex-row justify-start align-middle gap-10 w-full -mt-[26px]">
                 <div className="max-w-md">
                 <div className="relative flex items-center w-full h-[50.4px] rounded-lg bg-gray-100 border-0 overflow-hidden">
                     <div className="grid place-items-center h-full w-12 text-gray-300">
@@ -29,12 +29,18 @@ export default function FunctionBarComp() {
                 </div>
                 </div>
                 <div className="">
-                <select className="py-4 px-4 pe-20 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                    <option value="">Sort By</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
+                    <select className="py-4 px-4 pe-20 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                        <option value="">Sort By</option>
+                        <option>Date Added</option>
+                        <option>Name</option>
+                        <option>Deadline</option>
+                    </select>
+                </div>
+                <div className="p-0 b-0 flex flex-row justify-center align-middle hover:text-white">
+                    <button type="button" className="text-red-600 ring-2 ring-red-600 bg-white border- hover:bg-red-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Delete Selected</button>
+                </div>
+                <div className="p-0 b-0 -mx-7 flex flex-row justify-center align-middle hover:text-white">
+                    <button type="button" className="text-green-600 ring-2 ring-green-600 bg-white border- hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Mark Selected As Complete</button>
                 </div>
             </div>
         </>
