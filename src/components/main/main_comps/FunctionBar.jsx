@@ -29,7 +29,7 @@ export default function FunctionBarComp() {
                 </div>
                 </div>
                 <div className="">
-                    <select className="py-4 px-4 pe-20 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                    <select id="sort-menu" className="py-4 px-4 pe-20 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                         <option value="">Sort By</option>
                         <option>Date Added</option>
                         <option>Name</option>
