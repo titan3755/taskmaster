@@ -1,20 +1,29 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import FormComp from "./main_comps/Form"
 import FunctionBarComp from "./main_comps/FunctionBar"
 import ItemListComp from "./main_comps/ItemList"
 import TitleComp from "./main_comps/Title"
+import { toast } from "react-hot-toast"
 
 export default function Main() {
     const [modalState, setModalState] = useState(false)
     const [taskTitle, setTaskTitle] = useState('')
+    const [listData, setListData] = useState([])
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        if (localStorage.getItem('listData')) {
+            setListData(JSON.parse(localStorage.getItem('listData')))
+            setLoading(false)
+        }
+    }, [])
     return (
-        <>
+        <> 
             <div className="w-full min-h-screen bg-white shadow-inner p-24 flex justify-center align-middle flex-col">
                 <div className="bg-white shadow-2xl border-gray-300 border rounded-xl w-full min-h-max p-10">
-                    <MainBox taskTitle={taskTitle} setTaskTitle={setTaskTitle} modalState={modalState} setModalState={setModalState} />
+                    <MainBox loading={loading} listData={listData} setListData={setListData} taskTitle={taskTitle} setTaskTitle={setTaskTitle} modalState={modalState} setModalState={setModalState} />
                 </div>
             </div>
-            {modalState ? <ModalBox taskTitle={taskTitle} setTaskTitle={setTaskTitle} modalState={modalState} setModalState={setModalState} /> : <></>}
+            {modalState ? <ModalBox listData={listData} setListData={setListData} taskTitle={taskTitle} setTaskTitle={setTaskTitle} modalState={modalState} setModalState={setModalState} /> : <></>}
         </>
     )
 }
@@ -26,7 +35,7 @@ function MainBox(props) {
                 <TitleComp />
                 <FormComp taskTitle={props.taskTitle} setTaskTitle={props.setTaskTitle} modalState={props.modalState} setModalState={props.setModalState} />
                 <FunctionBarComp />
-                <ItemListComp />
+                <ItemListComp loading={props.loading} listData={props.listData} setListData={props.setListData} />
             </div>
         </>
     )
@@ -34,9 +43,21 @@ function MainBox(props) {
 
 function ModalBox(props) {
     const [taskDesc, setTaskDesc] = useState('')
+    const [taskDeadline, setTaskDeadline] = useState({date: '', time: ''})
+    function submissionHandler(e) {
+        // let newArray = [props.listData].concat({title: props.taskTitle, desc: taskDesc, deadline: taskDeadline.date + ' ' + taskDeadline.time, date_added: new Date().toLocaleString(), selected: false, completed: false})
+        let newArray = [...props.listData, {title: props.taskTitle, desc: taskDesc, deadline: taskDeadline.date + ' ' + taskDeadline.time, date_added: new Date().toLocaleString(), selected: false, completed: false}]
+        e.preventDefault()
+        props.setListData(newArray)
+        console.log(newArray)
+        props.setTaskTitle('')
+        props.setModalState(false)
+        localStorage.setItem('listData', JSON.stringify(newArray))
+        toast.success('Task added successfully')
+    }
     return (
         <>
-            <form>
+            <form onSubmit={submissionHandler}>
             <div className="fixed top-1/2 left-1/2 -translate-x-1/2 backdrop-blur-3xl overflow-y-scroll -translate-y-1/2 justify-center items-center w-full h-full">
                 <div className="relative p-10 w-full">
                     <div className="relative bg-white rounded-lg shadow">
@@ -65,13 +86,13 @@ function ModalBox(props) {
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clipRule="evenodd"/>
                                         </svg>
                                     </div>
-                                    <input type="time" id="time" className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" min="09:00" max="18:00" value="00:00" required />
+                                    <input type="time" id="time" className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={taskDeadline.time} onChange={(e) => {setTaskDeadline({...taskDeadline, time: e.target.value})}} required />
                                 </div>
                             </div>
                             <div className="mb-6">
                                 <label htmlFor="date" className="block mb-2 text-lg font-medium text-gray-900">Select deadline date</label>
                                 <div className="relative">
-                                    <input type="date" id="date" className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                                    <input type="date" id="date" value={taskDeadline.date} onChange={(e) => {setTaskDeadline({...taskDeadline, date: e.target.value})}} className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                                 </div>
                             </div>
                             <div className="mb-6">
@@ -79,7 +100,7 @@ function ModalBox(props) {
                             </div>
                         </div>
                         <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
-                            <button type="button" onClick={() => {props.setModalState(false)}} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Task</button>
+                            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Task</button>
                         </div>
                     </div>
                 </div>
