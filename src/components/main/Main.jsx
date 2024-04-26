@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import FormComp from "./main_comps/Form"
 import FunctionBarComp from "./main_comps/FunctionBar"
 import ItemListComp from "./main_comps/ItemList"
@@ -10,12 +10,22 @@ export default function Main() {
     const [taskTitle, setTaskTitle] = useState('')
     const [listData, setListData] = useState([])
     const [loading, setLoading] = useState(true)
+    const pageRendered = useRef(false)
     useEffect(() => {
         if (localStorage.getItem('listData')) {
             setListData(JSON.parse(localStorage.getItem('listData')))
             setLoading(false)
+        } else {
+            setLoading(false)
         }
     }, [])
+    useEffect(() => {
+        if (pageRendered.current) {
+            localStorage.setItem('listData', JSON.stringify(listData))
+            return
+        }
+        pageRendered.current = true
+    }, [listData])
     return (
         <> 
             <div className="w-full min-h-screen bg-white shadow-inner p-24 flex justify-center align-middle flex-col">
@@ -34,7 +44,7 @@ function MainBox(props) {
             <div className="flex flex-col gap-12 justify-center px-12">
                 <TitleComp />
                 <FormComp taskTitle={props.taskTitle} setTaskTitle={props.setTaskTitle} modalState={props.modalState} setModalState={props.setModalState} />
-                <FunctionBarComp />
+                <FunctionBarComp listData={props.listData} setListData={props.setListData} />
                 <ItemListComp loading={props.loading} listData={props.listData} setListData={props.setListData} />
             </div>
         </>

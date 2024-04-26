@@ -1,4 +1,37 @@
-export default function FunctionBarComp() {
+export default function FunctionBarComp(props) {
+    function deleteHandler() {
+        props.setListData((prev) => {
+            return prev.filter((objMapped) => {
+                return !objMapped.selected
+            })
+        })
+    }
+    function completedHandler() {
+        props.setListData((prev) => {
+            return prev.map((objMapped) => {
+                if (objMapped.selected) {
+                    return {...objMapped, completed: true}
+                } else {
+                    return objMapped
+                }
+            })
+        })
+    }
+    function searchHandler() {
+        let search = document.getElementById('search').value
+        let searchResults = props.listData.filter((objMapped) => {
+            return objMapped.title.toLowerCase().includes(search.toLowerCase())
+        })
+        props.setListData((prev) => {
+            return prev.map((objMapped) => {
+                if (searchResults.includes(objMapped)) {
+                    return {...objMapped, selected: true}
+                } else {
+                    return {...objMapped, selected: false}
+                }
+            })
+        })
+    }
     return (
         <>
             <div className="flex flex-row justify-start align-middle gap-10 w-full -mt-[26px]">
@@ -22,6 +55,7 @@ export default function FunctionBarComp() {
                     </div>
                     <input
                     className="peer h-full w-full outline-none text-sm bg-gray-100 text-gray-900 pr-2"
+                    onChange={searchHandler}
                     type="text"
                     id="search"
                     placeholder="Search task"
@@ -37,10 +71,10 @@ export default function FunctionBarComp() {
                     </select>
                 </div>
                 <div className="p-0 b-0 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" className="text-red-600 ring-2 ring-red-600 bg-white border- hover:bg-red-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Delete Selected</button>
+                    <button type="button" onClick={deleteHandler} className="text-red-600 ring-2 ring-red-600 bg-white border- hover:bg-red-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Delete Selected</button>
                 </div>
                 <div className="p-0 b-0 -mx-7 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" className="text-green-600 ring-2 ring-green-600 bg-white border- hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Mark Selected As Complete</button>
+                    <button type="button" onClick={completedHandler} className="text-green-600 ring-2 ring-green-600 bg-white border- hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Mark Selected As Complete</button>
                 </div>
             </div>
         </>
