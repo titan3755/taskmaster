@@ -55,7 +55,6 @@ function ModalBox(props) {
     const [taskDesc, setTaskDesc] = useState('')
     const [taskDeadline, setTaskDeadline] = useState({date: '', time: ''})
     function submissionHandler(e) {
-        // let newArray = [props.listData].concat({title: props.taskTitle, desc: taskDesc, deadline: taskDeadline.date + ' ' + taskDeadline.time, date_added: new Date().toLocaleString(), selected: false, completed: false})
         let newArray = [...props.listData, {title: props.taskTitle, desc: taskDesc, deadline: taskDeadline.date + ' ' + taskDeadline.time, date_added: new Date().toLocaleString(), selected: false, completed: false}]
         e.preventDefault()
         props.setListData(newArray)
@@ -80,11 +79,11 @@ function ModalBox(props) {
                             <p className="text-base leading-relaxed text-gray-500">
                                 Some additional information is required regarding your task. Type the information onto the input fields below, you can leave some fields empty.
                             </p>
-                            <div class="mb-6">
+                            <div className="mb-6">
                                 <label htmlFor="default-input" className="block mb-2 text-lg font-medium text-gray-900">Task Title</label>
                                 <input type="text" id="default-input" value={props.taskTitle} onChange={(e) => {props.setTaskTitle(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                             </div>
-                            <div class="mb-6">
+                            <div className="mb-6">
                                 <label htmlFor="default-input" className="block mb-2 text-lg font-medium text-gray-900">Task Description</label>
                                 <textarea rows={20} id="default-input" value={taskDesc} onChange={(e) => {setTaskDesc(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                             </div>
@@ -105,12 +104,10 @@ function ModalBox(props) {
                                     <input type="date" id="date" value={taskDeadline.date} onChange={(e) => {setTaskDeadline({...taskDeadline, date: e.target.value})}} className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                                 </div>
                             </div>
-                            <div className="mb-6">
-                                
-                            </div>
                         </div>
-                        <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+                        <div className="flex flex-row gap-5 align-middle items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
                             <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Task</button>
+                            <button type="button" onClick={() => {props.setModalState(false)}} className="text-white bg-red-500 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
                         </div>
                     </div>
                 </div>
