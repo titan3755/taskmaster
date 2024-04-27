@@ -25,7 +25,8 @@ export default function FunctionBarComp(props) {
         } else if (selected.length === 0) {
             toast.error('Please select a task to edit')
         } else {
-            toast.error('Edit functionality not implemented yet')
+            props.setEditorMode([true, selected[0]])
+            props.setModalState(true)
         }
     }
     function completedHandler() {
