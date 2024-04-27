@@ -1,3 +1,5 @@
+import { faCheckCircle, faCross, faTasks, faX } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { toast } from "react-hot-toast"
 
 export default function FunctionBarComp(props) {
@@ -90,7 +92,7 @@ export default function FunctionBarComp(props) {
     }
     return (
         <>
-            <div className="flex flex-row justify-start align-middle gap-10 w-full -mt-[26px]">
+            <div className={props.modalState ? "flex flex-row p-5 shadow-md rounded-md bg-white justify-center align-middle gap-10 w-full -mt-[26px]" : "flex flex-row p-5 shadow-md opacity-100 rounded-md top-0 z-[1] sticky bg-white justify-center align-middle gap-10 w-full -mt-[26px]"}>
                 <div className="max-w-md">
                 <div className="relative flex items-center w-full h-[50.4px] rounded-lg bg-gray-100 border-0 overflow-hidden">
                     <div className="grid place-items-center h-full w-12 text-gray-300">
@@ -127,13 +129,22 @@ export default function FunctionBarComp(props) {
                     </select>
                 </div>
                 <div className="p-0 b-0 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" onClick={deleteHandler} className="text-red-600 ring-2 ring-red-600 bg-white border- hover:bg-red-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Delete Selected</button>
+                    <button type="button" onClick={deleteHandler} className="text-red-600 ring-2 ring-red-600 bg-white flex flex-row align-middle justify-center items-center border- hover:bg-red-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">
+                        <FontAwesomeIcon icon={faX} className="me-2 text-lg" />
+                        Delete Task
+                    </button>
                 </div>
                 <div className="p-0 b-0 -mx-7 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" onClick={editHandler} className="text-yellow-500 ring-2 ring-yellow-500 bg-white border- hover:bg-yellow-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Edit Selected</button>
+                    <button type="button" onClick={editHandler} className="text-yellow-500 ring-2 ring-yellow-500 flex flex-row align-middle justify-center items-center bg-white border- hover:bg-yellow-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">
+                        <FontAwesomeIcon icon={faTasks} className="me-2 text-lg" />
+                        Edit Task
+                    </button>
                 </div>
                 <div className="p-0 b-0 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" onClick={completedHandler} className="text-green-600 ring-2 ring-green-600 bg-white border- hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">Mark Selected As Complete</button>
+                    <button type="button" onClick={completedHandler} className="text-green-600 ring-2 ring-green-600 flex flex-row align-middle justify-center items-center bg-white border- hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">
+                        <FontAwesomeIcon icon={faCheckCircle} className="me-2 text-lg" />
+                        Mark As Complete
+                    </button>
                 </div>
             </div>
         </>

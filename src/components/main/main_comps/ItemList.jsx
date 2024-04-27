@@ -1,5 +1,6 @@
 import { faPlusCircle, faHourglass1, faStopwatch, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { dateSeparator } from "../../../helpers/date_helpers"
 export default function ItemListComp(props) {
     return (
         <>
@@ -66,7 +67,7 @@ function ItemComp(props) {
                             <>
                                 <div className="border rounded-md shadow-sm ring-2 ring-blue-700 flex flex-row align-middle justify-center items-center p-2">
                                     <FontAwesomeIcon icon={faPlusCircle} className="text-blue-700 p-0 mx-2" />
-                                    <p>{props.date_added}</p>
+                                    <p>{dateSeparator(props.date_added)}</p>
                                 </div>
                                 <div className="border rounded-md shadow-sm ring-2 ring-yellow-400 flex flex-row align-middle justify-center items-center p-2">
                                     <FontAwesomeIcon icon={faHourglass1} className="text-yellow-400 p-0 mx-2" />
