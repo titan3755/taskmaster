@@ -30,8 +30,8 @@ export default function Main() {
     }, [listData])
     return (
         <> 
-            <div className="w-full min-h-screen bg-white shadow-inner p-24 flex justify-center align-middle flex-col">
-                <div className="bg-white shadow-2xl border-gray-300 border rounded-xl w-full min-h-max p-10">
+            <div className="w-full min-h-[100vh] md:min-h-screen bg-white shadow-inner p-0 md:p-24 flex justify-center align-middle flex-col">
+                <div className="bg-white shadow-2xl border-gray-300 border rounded-xl w-full h-full md:h-auto min-h-max p-5 md:p-10">
                     <MainBox editorMode={editorMode} setEditorMode={setEditorMode} loading={loading} listData={listData} setListData={setListData} taskTitle={taskTitle} setTaskTitle={setTaskTitle} modalState={modalState} setModalState={setModalState} />
                 </div>
             </div>
@@ -43,7 +43,7 @@ export default function Main() {
 function MainBox(props) {
     return (
         <>
-            <div className="flex flex-col gap-12 justify-center px-12">
+            <div className="flex flex-col gap-12 justify-center p-0 md:px-12">
                 <TitleComp />
                 <FormComp taskTitle={props.taskTitle} setTaskTitle={props.setTaskTitle} modalState={props.modalState} setModalState={props.setModalState} />
                 <FunctionBarComp editorMode={props.editorMode} setEditorMode={props.setEditorMode} modalState={props.modalState} setModalState={props.setModalState} listData={props.listData} setListData={props.setListData} />

@@ -70,10 +70,10 @@ export default function FunctionBarComp(props) {
     }
     function sortHandler() {
         let sort = document.getElementById('sort-menu').value
-        if (sort === 'da') {
+        if (sort === 'lt') {
             props.setListData((prev) => {
                 return [].concat(prev).sort((a, b) => {
-                    return new Date(a.date_added) - new Date(b.date_added)
+                    return new Date(b.date_added) - new Date(a.date_added)
                 })
             })
         } else if (sort === 'na') {
@@ -92,10 +92,10 @@ export default function FunctionBarComp(props) {
     }
     return (
         <>
-            <div className={props.modalState ? "flex flex-row p-5 shadow-md rounded-md bg-white justify-center align-middle gap-10 w-full -mt-[26px]" : "flex flex-row p-5 shadow-md opacity-100 rounded-md top-0 z-[1] sticky bg-white justify-center align-middle gap-10 w-full -mt-[26px]"}>
-                <div className="max-w-md">
-                <div className="relative flex items-center w-full h-[50.4px] rounded-lg bg-gray-100 border-0 overflow-hidden">
-                    <div className="grid place-items-center h-full w-12 text-gray-300">
+            <div className={props.modalState ? "flex flex-row p-5 shadow-md rounded-md bg-white justify-center items-center align-middle gap-10 w-full -mt-[26px]" : "flex flex-row p-5 shadow-md opacity-100 rounded-md top-0 z-[1] sticky bg-white justify-center align-middle gap-10 w-full -mt-[26px]"}>
+                <div className="max-w-md md:block hidden">
+                <div className="relative flex items-center w-full h-[40.4px] md:h-[50.4px] rounded-lg bg-gray-100 border-0 overflow-hidden">
+                    <div className="grid place-items-center h-full w-full md:w-12 text-gray-300">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -120,30 +120,36 @@ export default function FunctionBarComp(props) {
                     />
                 </div>
                 </div>
-                <div className="">
+                <div className="md:block hidden">
                     <select id="sort-menu" onChange={sortHandler} className="py-4 px-4 pe-20 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                         <option value="sb">Sort By</option>
-                        <option value="da">Date Added</option>
+                        <option value="lt">Lastest</option>
                         <option value="na">Name</option>
                         <option value="dl">Deadline</option>
                     </select>
                 </div>
                 <div className="p-0 b-0 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" onClick={deleteHandler} className="text-red-600 ring-2 ring-red-600 bg-white flex flex-row align-middle justify-center items-center border- hover:bg-red-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">
-                        <FontAwesomeIcon icon={faX} className="me-2 text-lg" />
-                        Delete Task
+                    <button type="button" onClick={deleteHandler} className="text-red-600 ring-2 ring-red-600 bg-white md:aspect-auto aspect-square md:w-auto w-12 flex flex-row align-middle justify-center items-center border- hover:bg-red-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full md:rounded-lg p-2 text-sm md:px-5 md:py-[14.4px] text-center md:me-2 md:mb-2">
+                        <FontAwesomeIcon icon={faX} className="m-0 p-0 md:me-2 text-lg" />
+                        <p className="md:block hidden">
+                            Delete Task
+                        </p>
                     </button>
                 </div>
                 <div className="p-0 b-0 -mx-7 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" onClick={editHandler} className="text-yellow-500 ring-2 ring-yellow-500 flex flex-row align-middle justify-center items-center bg-white border- hover:bg-yellow-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">
-                        <FontAwesomeIcon icon={faTasks} className="me-2 text-lg" />
-                        Edit Task
+                    <button type="button" onClick={editHandler} className="text-yellow-500 ring-2 ring-yellow-500 md:aspect-auto aspect-square flex flex-row md:w-auto w-12 align-middle justify-center items-center bg-white hover:bg-yellow-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full md:rounded-lg p-2 text-sm md:px-5 md:py-[14.4px] text-center md:me-2 md:mb-2">
+                        <FontAwesomeIcon icon={faTasks} className="m-0 p-0 b-0 md:me-2 text-lg" />
+                        <p className="md:block hidden">
+                            Edit Task
+                        </p>
                     </button>
                 </div>
                 <div className="p-0 b-0 flex flex-row justify-center align-middle hover:text-white">
-                    <button type="button" onClick={completedHandler} className="text-green-600 ring-2 ring-green-600 flex flex-row align-middle justify-center items-center bg-white border- hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-[14.4px] text-center me-2 mb-2">
-                        <FontAwesomeIcon icon={faCheckCircle} className="me-2 text-lg" />
-                        Mark As Complete
+                    <button type="button" onClick={completedHandler} className="text-green-600 ring-2 ring-green-600 md:aspect-auto aspect-square flex flex-row md:w-auto w-12 align-middle justify-center items-center bg-white border- hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full md:rounded-lg p-2 text-sm md:px-5 md:py-[14.4px] text-center md:me-2 md:mb-2">
+                        <FontAwesomeIcon icon={faCheckCircle} className="m-0 p-0 md:me-2 text-lg" />
+                        <p className="md:block hidden">
+                            Mark As Complete
+                        </p>
                     </button>
                 </div>
             </div>
