@@ -30,8 +30,8 @@ export default function Main() {
     }, [listData])
     return (
         <> 
-            <div className="w-full min-h-[100vh] md:min-h-screen bg-white shadow-inner p-0 md:p-24 flex justify-center align-middle flex-col">
-                <div className="bg-white shadow-2xl border-gray-300 border rounded-xl w-full h-full md:h-auto min-h-max p-5 md:p-10">
+            <div className="w-full min-h-[100vh] lg:min-h-screen bg-white shadow-inner p-0 lg:p-24 flex justify-center align-middle flex-col">
+                <div className="bg-white shadow-2xl border-gray-300 border rounded-xl w-full h-full lg:h-auto min-h-max p-5 lg:p-10">
                     <MainBox editorMode={editorMode} setEditorMode={setEditorMode} loading={loading} listData={listData} setListData={setListData} taskTitle={taskTitle} setTaskTitle={setTaskTitle} modalState={modalState} setModalState={setModalState} />
                 </div>
             </div>
@@ -43,7 +43,7 @@ export default function Main() {
 function MainBox(props) {
     return (
         <>
-            <div className="flex flex-col gap-12 justify-center p-0 md:px-12">
+            <div className="flex flex-col min-h-screen gap-12 justify-center p-0 lg:px-12">
                 <TitleComp />
                 <FormComp taskTitle={props.taskTitle} setTaskTitle={props.setTaskTitle} modalState={props.modalState} setModalState={props.setModalState} />
                 <FunctionBarComp editorMode={props.editorMode} setEditorMode={props.setEditorMode} modalState={props.modalState} setModalState={props.setModalState} listData={props.listData} setListData={props.setListData} />
@@ -78,14 +78,14 @@ function ModalBox(props) {
             <>
                 <form onSubmit={editHandler}>
                 <div className="fixed top-1/2 left-1/2 -translate-x-1/2 backdrop-blur-3xl overflow-y-scroll -translate-y-1/2 justify-center items-center w-full h-full">
-                    <div className="relative p-10 w-full">
+                    <div className="relative p-4 lg:p-10 w-full">
                         <div className="relative bg-white rounded-lg shadow">
-                            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                            <div className="flex items-center justify-between p-4 lg:p-5 border-b rounded-t">
                                 <h3 className="text-xl font-semibold text-gray-900">
                                     Edit Task Information
                                 </h3>
                             </div>
-                            <div className="p-4 md:p-5 space-y-4">
+                            <div className="p-0 lg:p-5 space-y-4">
                                 <p className="text-base leading-relaxed text-gray-500">
                                     Edit existing task information. Type the information onto the input fields below, you can leave some fields empty.
                                 </p>
@@ -115,7 +115,7 @@ function ModalBox(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-row gap-5 align-middle items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+                            <div className="flex flex-row gap-5 align-middle items-center p-4 lg:p-5 border-t border-gray-200 rounded-b">
                                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Task</button>
                                 <button type="button" onClick={() => {props.setModalState(false);props.setEditorMode([false, {}])}} className="text-white bg-red-500 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
                             </div>
@@ -141,14 +141,14 @@ function ModalBox(props) {
             <>
                 <form onSubmit={submissionHandler}>
                 <div className="fixed top-1/2 left-1/2 -translate-x-1/2 backdrop-blur-3xl overflow-y-scroll -translate-y-1/2 justify-center items-center w-full h-full">
-                    <div className="relative p-10 w-full">
+                    <div className="relative p-0 lg:p-10 w-full">
                         <div className="relative bg-white rounded-lg shadow">
-                            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                            <div className="flex items-center justify-between p-4 lg:p-5 border-b rounded-t">
                                 <h3 className="text-xl font-semibold text-gray-900">
                                     Additional Task Information
                                 </h3>
                             </div>
-                            <div className="p-4 md:p-5 space-y-4">
+                            <div className="p-4 lg:p-5 space-y-4">
                                 <p className="text-base leading-relaxed text-gray-500">
                                     Some additional information is required regarding your task. Type the information onto the input fields below, you can leave some fields empty.
                                 </p>
@@ -178,7 +178,7 @@ function ModalBox(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-row gap-5 align-middle items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+                            <div className="flex flex-row gap-5 align-middle items-center p-4 lg:p-5 border-t border-gray-200 rounded-b">
                                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Task</button>
                                 <button type="button" onClick={() => {props.setModalState(false)}} className="text-white bg-red-500 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
                             </div>

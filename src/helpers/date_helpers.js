@@ -4,5 +4,5 @@ export function dateSeparator(dateStr) {
     let day = date.getDate()
     let month = monthArray[date.getMonth()]
     let year = date.getFullYear()
-    return `${day} ${month} ${year}`
+    return `${day} ${month} ${year} at ${date.getHours()}:${date.getMinutes()}`
 }
