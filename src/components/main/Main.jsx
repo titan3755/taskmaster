@@ -84,7 +84,7 @@ function ModalEditor(props) {
                                     Edit Task Information
                                 </h3>
                             </div>
-                            <div className="p-0 lg:p-5 space-y-4">
+                            <div className="p-4 lg:p-5 space-y-4">
                                 <p className="text-base leading-relaxed text-gray-500">
                                     Edit existing task information. Type the information onto the input fields below, you can leave some fields empty.
                                 </p>
