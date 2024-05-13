@@ -77,7 +77,7 @@ function ModalEditor(props) {
             <>
                 <form onSubmit={editHandler}>
                 <div className="fixed top-1/2 left-1/2 -translate-x-1/2 backdrop-blur-3xl overflow-y-scroll -translate-y-1/2 justify-center items-center w-full h-full">
-                    <div className="relative p-4 lg:p-10 w-full">
+                    <div className="relative p-0 lg:p-10 w-full">
                         <div className="relative bg-white rounded-lg shadow">
                             <div className="flex items-center justify-between p-4 lg:p-5 border-b rounded-t">
                                 <h3 className="text-xl font-semibold text-gray-900">
